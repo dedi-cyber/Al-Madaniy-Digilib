@@ -305,7 +305,7 @@
                                 <p class="text-[11px] text-slate-400">Gratis & Bebas Akses</p>
                             </div>
                             <div>
-                                <p class="text-xl font-bold text-amber-300">6+</p>
+                                <p class="text-xl font-bold text-amber-300">8+</p>
                                 <p class="text-[11px] text-slate-400">Perpustakaan Dunia</p>
                             </div>
                         </div>
@@ -352,7 +352,7 @@
                                 <i class="fa-solid fa-building-columns"></i>
                             </div>
                             <span class="text-xs font-bold text-slate-800 group-hover:text-brand-emerald">Perpusnas RI</span>
-                            <span class="text-[10px] text-slate-400 mt-0.5">E-Resources Nasional</span>
+                            <span class="text-[10px] text-slate-400 mt-0.5">E-Resources RI</span>
                         </a>
 
                         <!-- Link 2: iPusnas -->
@@ -362,7 +362,7 @@
                                 <i class="fa-solid fa-tablet-screen-button"></i>
                             </div>
                             <span class="text-xs font-bold text-slate-800 group-hover:text-brand-emerald">iPusnas Digital</span>
-                            <span class="text-[10px] text-slate-400 mt-0.5">Aplikasi E-Book RI</span>
+                            <span class="text-[10px] text-slate-400 mt-0.5">Aplikasi E-Book</span>
                         </a>
 
                         <!-- Link 3: Perpustakaan Kemendikbud -->
@@ -372,7 +372,7 @@
                                 <i class="fa-solid fa-graduation-cap"></i>
                             </div>
                             <span class="text-xs font-bold text-slate-800 group-hover:text-brand-emerald">Kemendikbud</span>
-                            <span class="text-[10px] text-slate-400 mt-0.5">Pustaka Pendidikan</span>
+                            <span class="text-[10px] text-slate-400 mt-0.5">Pustaka Sekolah</span>
                         </a>
 
                         <!-- Link 4: Open Library -->
@@ -382,7 +382,7 @@
                                 <i class="fa-solid fa-book"></i>
                             </div>
                             <span class="text-xs font-bold text-slate-800 group-hover:text-brand-emerald">Open Library</span>
-                            <span class="text-[10px] text-slate-400 mt-0.5">Katalog Informasi Dunia</span>
+                            <span class="text-[10px] text-slate-400 mt-0.5">Katalog Dunia</span>
                         </a>
 
                         <!-- Link 5: World Digital Library -->
@@ -391,7 +391,7 @@
                             <div class="w-9 h-9 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-sm mb-2 group-hover:scale-110 transition">
                                 <i class="fa-solid fa-earth-americas"></i>
                             </div>
-                            <span class="text-xs font-bold text-slate-800 group-hover:text-brand-emerald">World Digital Lib</span>
+                            <span class="text-xs font-bold text-slate-800 group-hover:text-brand-emerald">World Digital</span>
                             <span class="text-[10px] text-slate-400 mt-0.5">UNESCO / LOC</span>
                         </a>
 
@@ -412,7 +412,7 @@
                                 <i class="fa-solid fa-book-atlas"></i>
                             </div>
                             <span class="text-xs font-bold text-slate-800 group-hover:text-brand-emerald">WeLib Digital</span>
-                            <span class="text-[10px] text-slate-400 mt-0.5">Akses Pustaka Terbuka</span>
+                            <span class="text-[10px] text-slate-400 mt-0.5">Pustaka Terbuka</span>
                         </a>
 
                         <!-- Link 8: F15 Library -->
@@ -422,7 +422,7 @@
                                 <i class="fa-solid fa-book-journal-whills"></i>
                             </div>
                             <span class="text-xs font-bold text-slate-800 group-hover:text-brand-emerald">F15 Library</span>
-                            <span class="text-[10px] text-slate-400 mt-0.5">Koleksi Digital Global</span>
+                            <span class="text-[10px] text-slate-400 mt-0.5">Digital Global</span>
                         </a>
                     </div>
                 </div>
@@ -495,11 +495,11 @@
                         <ul class="text-xs text-slate-300 space-y-2">
                             <li class="flex items-start gap-2">
                                 <i class="fa-solid fa-location-dot text-brand-emerald mt-0.5"></i>
-                                <span>Komplek Sekolah Islam Terpadu Al Madaniy Lubuk Basung, Kab. Agam, Sumatera Barat</span>
+                                <span>Jl. Utama Lubuk Basung, Kab. Agam, Sumatera Barat</span>
                             </li>
                             <li class="flex items-center gap-2">
                                 <i class="fa-solid fa-envelope text-brand-emerald"></i>
-                                <span>dedi.gce@madrasah.id</span>
+                                <span>perpus@smpitalmadaniy.sch.id</span>
                             </li>
                             <li class="flex items-center gap-2">
                                 <i class="fa-solid fa-clock text-brand-emerald"></i>
@@ -632,12 +632,18 @@
                 </div>
             </div>
 
-            <p class="text-[11px] text-slate-400">Tunjukkan QR Code ini ke Uustadz/Pustakawan saat melakukan peminjaman buku fisik di sekolah.</p>
+            <p class="text-[11px] text-slate-400">Tunjukkan QR Code ini ke Ustadz/Pustakawan saat melakukan peminjaman buku fisik di sekolah.</p>
         </div>
     </div>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
+        // ==========================================
+        // KONFIGURASI GOOGLE SHEETS REKAP PENGUNJUNG
+        // ==========================================
+        // Tempelkan Link Web App dari Google Apps Script Anda di dalam tanda petik di bawah ini:
+        const GOOGLE_SHEET_WEB_APP_URL = "URL_WEB_APP_GOOGLE_SCRIPT_ANDA";
+
         // Seed database for books curated for SMPIT Al Madaniy
         const booksData = [
             {
@@ -779,6 +785,29 @@
             }
         }
 
+        // Send Visitor Data to Google Sheets API
+        function sendGuestDataToGoogleSheet(name, id, role) {
+            if (!GOOGLE_SHEET_WEB_APP_URL || GOOGLE_SHEET_WEB_APP_URL === "URL_WEB_APP_GOOGLE_SCRIPT_ANDA") {
+                return; // URL belum dikonfigurasi, abaikan pengiriman
+            }
+
+            const data = {
+                nama: name,
+                id: id,
+                peran: role,
+                waktu: new Date().toLocaleString('id-ID')
+            };
+
+            fetch(GOOGLE_SHEET_WEB_APP_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).catch(err => console.log('Google Sheets log info:', err));
+        }
+
         // Handle Guest Form Login Submission
         function handleGuestLogin(e) {
             e.preventDefault();
@@ -795,6 +824,9 @@
             currentUser.id = idInput || "ID-" + Math.floor(1000 + Math.random() * 9000);
             currentUser.role = roleInput;
 
+            // Send record to Google Sheets automatically
+            sendGuestDataToGoogleSheet(currentUser.name, currentUser.id, currentUser.role);
+
             enterMainPlatform();
         }
 
@@ -803,6 +835,10 @@
             currentUser.name = "Siswa QR Terverifikasi";
             currentUser.id = "NIS-2026088";
             currentUser.role = "Murid";
+
+            // Send record to Google Sheets automatically
+            sendGuestDataToGoogleSheet(currentUser.name, currentUser.id, currentUser.role);
+
             enterMainPlatform();
         }
 
